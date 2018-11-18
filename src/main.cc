@@ -12,7 +12,6 @@ const double initial_alpha = 0;
 const int kMaxIter = 30;
 const double runs = 100.0;
 
-
 int main(){
   for(int j = 0; j < 6; ++j){
     double media = 0.0;

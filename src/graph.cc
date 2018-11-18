@@ -37,11 +37,11 @@ void Graph::inferior_matrix_parse(std::string line){
     else {
       for(int i = 0; i < (int) words.size(); ++i){
 	double weight = (double) std::stoi(words[i]);
-	if(weight == 0) ++current_node_, current_neighboor_ = 0;
+	if(weight == 0) ++current_node_, current_neighbor_ = 0;
 	else {
-	  topo_[current_node_][current_neighboor_] = weight;
-	  topo_[current_neighboor_][current_node_] = weight;
-	  ++current_neighboor_;
+	  topo_[current_node_][current_neighbor_] = weight;
+	  topo_[current_neighbor_][current_node_] = weight;
+	  ++current_neighbor_;
 	}
       }
     }
@@ -68,10 +68,10 @@ void Graph::superior_matrix_parse(std::string line){
     else {
       for(int i = 0; i < (int) words.size(); ++i){
 	double weight = (double) std::stoi(words[i]);
-	topo_[current_node_][current_neighboor_] = weight;
-	topo_[current_neighboor_][current_node_] = weight;
-	++current_neighboor_;
-	if(current_neighboor_ == (int) size_) current_neighboor_ = ++current_node_;
+	topo_[current_node_][current_neighbor_] = weight;
+	topo_[current_neighbor_][current_node_] = weight;
+	++current_neighbor_;
+	if(current_neighbor_ == (int) size_) current_neighbor_ = ++current_node_;
       }
     }
   } else {
