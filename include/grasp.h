@@ -1,8 +1,13 @@
+#include <string>
+#include <vector>
+
+#include "graph.h"
+
 class Grasp {
   public:
-	const inf = 0x3f3f3f3f;
+	const int inf = 0x3f3f3f3f;
 
-	Grasp(const string test_path, double alpha, int kMaxIter) : 
+	Grasp(const std::string test_path, double alpha, int kMaxIter) : 
 	  test_path_(test_path), 
 	  graph_(test_path), 
 	  size_(graph_.size()), 
@@ -15,6 +20,8 @@ class Grasp {
 		else cost += graph_.distance(u, size_-1);
 	  }
 	  cmax_ = cmin_ = cost;
+	  printf("outside run : %d %lf\n", kMaxIter_, alpha_);
+	  run();
 	}
 
 	void run();
@@ -30,7 +37,7 @@ class Grasp {
 
 	void swap_permutation(unsigned int u);
 
-	string test_path_;
+	std::string test_path_;
 	Graph graph_;
 	unsigned int size_;
 	double alpha_;

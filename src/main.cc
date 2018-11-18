@@ -2,16 +2,19 @@
 
 #include "grasp.h"
 
-const string test_path[6] = {"~/GRASP/instances/gr17.tsp", 
-			     "~/GRASP/instances/gr24.tsp", 
-			     "~/GRASP/instances/gr48.tsp", 
-			     "~/GRASP/instances/si175.tsp", 
-			     "~/GRASP/instances/si535.tsp", 
-			     "~/GRASP/instances/si1032.tsp"};
+const std::string test_path[6] = {"instances/gr17.tsp", 
+			     "instances/gr24.tsp", 
+			     "instances/gr48.tsp", 
+			     "instances/si175.tsp", 
+			     "instances/si535.tsp", 
+			     "instances/si1032.tsp"};
+const double initial_alpha = 0.85;
+const int kMaxIter = 30;
 
 int main(){
-	Grasp controller(test_path[0]);
-	controller.run();
-	controller.show_results();
+	Grasp controller(test_path[0], initial_alpha, kMaxIter);
+	//controller.run();
+	//controller.show_results();
+	puts("FINISHED\n");
 	return 0;
 }
