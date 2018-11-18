@@ -1,4 +1,3 @@
-#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,18 +7,8 @@ class Graph {
 	Graph(const std::string test_path) : 
 	  current_node_(0), 
 	  current_neighboor_(0),
-	  ready_to_read(false){
-	  std::string line;
-	  std::ifstream file;
-	  file.open(test_path);
-	  if(!file){
-		std::cerr << "Error while opening file.\n";
-		exit(1);
-	  }
-
-	  while(getline(file, line)) analyse_input(line);
-
-	  file.close();
+	  ready_to_read_(false){
+	  parse_input_file(test_path);
 	}
 
 	double distance(int u, int v);
@@ -27,11 +16,15 @@ class Graph {
 	unsigned int size();
 
   private:
-	void analyse_input(std::string line);
+	void parse_input_file(std::string test_path);
+
+	void inferior_matrix_parse(std::string line);
+	
+	void superior_matrix_parse(std::string line);
 
 	int current_node_;
 	int current_neighboor_;
-	bool ready_to_read;
+	bool ready_to_read_;
 	unsigned int size_;
 	std::vector< std::vector<double> > topo_; 
 };
