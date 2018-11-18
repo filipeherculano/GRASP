@@ -5,8 +5,6 @@
 
 class Grasp {
   public:
-	const int inf = 0x3f3f3f3f;
-
 	Grasp(const std::string test_path, double alpha, int kMaxIter) : 
 	  test_path_(test_path), 
 	  graph_(test_path), 
@@ -16,12 +14,9 @@ class Grasp {
 	  double cost = 0.0;
 	  for(unsigned int u = 0; u < size_; ++u) {
 		itinerary_.push_back(u);
-		if(u) cost += graph_.distance(u-1, u);
-		else cost += graph_.distance(u, size_-1);
+		cost += graph_.distance(u, (u+1)%size_);
 	  }
-	  cmax_ = cmin_ = cost;
-	  printf("outside run : %d %lf\n", kMaxIter_, alpha_);
-	  run();
+	  current_ = cmax_ = cmin_ = cost;
 	}
 
 	void run();
@@ -29,6 +24,8 @@ class Grasp {
 	void show_results();
 
   private:
+	bool test(double cost);
+
 	bool is_candidate(double cost);
 
 	void adapt_alpha();
@@ -44,5 +41,6 @@ class Grasp {
 	int kMaxIter_;
 	double cmax_;
 	double cmin_;
+	double current_;
 	std::vector<int> itinerary_;
 };

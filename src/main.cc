@@ -8,13 +8,12 @@ const std::string test_path[6] = {"instances/gr17.tsp",
 			     "instances/si175.tsp", 
 			     "instances/si535.tsp", 
 			     "instances/si1032.tsp"};
-const double initial_alpha = 0.85;
-const int kMaxIter = 30;
+const double initial_alpha = 1;
+const int kMaxIter = 3000;
 
 int main(){
 	Grasp controller(test_path[0], initial_alpha, kMaxIter);
-	//controller.run();
-	//controller.show_results();
-	puts("FINISHED\n");
+	controller.run();
+	controller.show_results();
 	return 0;
 }
