@@ -59,12 +59,12 @@ class Grasp {
     /*
      *	Computes the cost of the neighbor state.
      */
-    double swap_cost(unsigned int u);
+    double swap_cost(unsigned int i, unsigned j);
 
     /*
      *	Swaps the current permutation, changing the current state.
      */
-    void swap_permutation(unsigned int u);
+    void swap_permutation(unsigned int u, unsigned int v);
 
     std::string test_path_;		// Test file path
     Graph graph_;			// Graph representation

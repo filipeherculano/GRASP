@@ -14,7 +14,7 @@ const double initial_alpha = 0.85;
 const int kMaxIter = 30;
 
 int main(){
-  for(int j = 0; j < 6; ++j){
+  for(int j = 5; j < 6; ++j){
     puts("-------------------------------------------------------------");
     std::cout << "Testing: " << test_path[j] << std::endl;
     printf("Initial alpha value: %lf\n", initial_alpha);

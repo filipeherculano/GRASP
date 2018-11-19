@@ -5,19 +5,22 @@
 #include "grasp.h"
 
 void Grasp::run(){
-  std::vector< std::pair<double, unsigned int> > LRC;
+  std::vector< std::pair<double, std::pair<unsigned int, unsigned int> > > LRC;
   srand(time(NULL));
   while(kMaxIter_--){
+    std::cout << kMaxIter_ << std::endl;
     for(unsigned int i = 0; i < size_; ++i){
-      double cost = swap_cost(i);
-      if(is_candidate(cost)) LRC.push_back(std::make_pair(cost, i));
+      for(unsigned int j = i+1; j < size_; ++j){
+	double cost = swap_cost(i,j);
+	if(is_candidate(cost)) LRC.push_back(std::make_pair(cost, std::make_pair(i,j)));
+      }
     }
 
     if(LRC.size() != 0){
       sort(LRC.begin(), LRC.end());
       while(LRC.size() > 20) LRC.pop_back();
       int random_choice = rand() % LRC.size();
-      swap_permutation(LRC[random_choice].second);
+      swap_permutation(LRC[random_choice].second.first, LRC[random_choice].second.second);
       current_ = LRC[random_choice].first;
       cmin_ = std::min(cmin_ , current_);
       cmax_ = std::max(cmax_ , current_);
@@ -68,21 +71,39 @@ void Grasp::adapt_alpha(){
   // TODO (filipe.herculano) : Implement changing function of alpha
 }
 
-double Grasp::swap_cost(unsigned int i){
+double Grasp::swap_cost(unsigned int i, unsigned int j){
+  // Temporary slow POC
+  double cost = 0.0;
+  std::swap(itinerary_[i], itinerary_[j]);  
+  for(int i = 0; i < (int) size_; ++i) 
+    cost += graph_.distance(itinerary_[i], itinerary_[(i+1)%size_]);
+  std::swap(itinerary_[i], itinerary_[j]);  
+  return cost;
+
+  /*
   unsigned int u = itinerary_[i];
-  unsigned int prev_node = itinerary_[(i-1+size_) % size_];
-  unsigned int v = itinerary_[(i+1) % size_];
-  unsigned int next_node = itinerary_[(i+2) % size_];
+  unsigned int prev_u = itinerary_[(i-1+size_) % size_];
+  unsigned int next_u = itinerary_[(i+1) % size_];
+
+  unsigned int v = itinerary_[j];
+  unsigned int prev_v = itinerary_[(j-1+size_) % size_];
+  unsigned int next_v = itinerary_[(j+1) % size_];
 
   double cost = current_;
-  cost -= graph_.distance(prev_node, u);
-  cost -= graph_.distance(v, next_node);
-  cost += graph_.distance(prev_node, v);
-  cost += graph_.distance(u, next_node);
+  cost -= graph_.distance(prev_u, u);
+  cost -= graph_.distance(u, next_u);
+  cost -= graph_.distance(prev_v, v);
+  cost -= graph_.distance(v, next_v);
+
+  cost += graph_.distance(prev_u, v);
+  cost += graph_.distance(v, next_u);
+  cost += graph_.distance(prev_v, u);
+  cost += graph_.distance(u, next_v);
 
   return cost;
+  */
 }
 
-void Grasp::swap_permutation(unsigned int i){
-  std::swap(itinerary_[i], itinerary_[(i+1) % size_]);
+void Grasp::swap_permutation(unsigned int u, unsigned int v){
+  std::swap(itinerary_[u], itinerary_[v]);
 }
