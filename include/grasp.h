@@ -66,6 +66,8 @@ class Grasp {
      */
     void swap_permutation(unsigned int u, unsigned int v);
 
+	double cost_of_linking(unsigned int i);
+
     std::string test_path_;		// Test file path
     Graph graph_;			// Graph representation
     unsigned int size_;			// Graph size
