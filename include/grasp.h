@@ -33,6 +33,11 @@ class Grasp {
      */
     double cmin(){ return cmin_; }
 
+    /*
+     *	Default get of class member 'initial_'.
+     */
+    double initial(){ return initial_; }
+
   private:
 
     /*
@@ -69,5 +74,6 @@ class Grasp {
     double cmax_;			// Maximum cost found
     double cmin_;			// Minimum cost found
     double current_;			// Current cost
+    double initial_;			// Initial solution
     std::vector<int> itinerary_;	// Current itinerary of Traveling Salesman
 };
