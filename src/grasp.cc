@@ -1,20 +1,24 @@
+#include <algorithm>
 #include <cstring>
 #include <utility>
 
 #include "grasp.h"
 
 void Grasp::run(){
-  std::vector< std::pair<unsigned int, double> > LRC;
+  std::vector< std::pair<double, unsigned int> > LRC;
   srand(time(NULL));
   while(kMaxIter_--){
     for(unsigned int i = 0; i < size_; ++i){
       double cost = swap_cost(i);
-      if(is_candidate(cost)) LRC.push_back(std::make_pair(i, cost));
+      if(is_candidate(cost)) LRC.push_back(std::make_pair(cost, i));
     }
+
     if(LRC.size() != 0){
+      sort(LRC.begin(), LRC.end());
+      while(LRC.size() > 20) LRC.pop_back();
       int random_choice = rand() % LRC.size();
-      swap_permutation(LRC[random_choice].first);
-      current_ = LRC[random_choice].second;
+      swap_permutation(LRC[random_choice].second);
+      current_ = LRC[random_choice].first;
       cmin_ = std::min(cmin_ , current_);
       cmax_ = std::max(cmax_ , current_);
     }
