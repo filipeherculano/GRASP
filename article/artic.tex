@@ -1,0 +1,274 @@
+% 
+% Modelo de artigo científico para a revista   v1.1
+%
+% PET - Automação e Sistemas da Escola Politécnica da Universidade de São Paulo
+%
+% e-mail do grupo: petmecatronica@gmail.com
+% e-mail da revista: revista @gmail.com
+%
+
+
+\documentclass[
+	% -- opções da classe memoir --
+	article,			% indica que é um artigo acadêmico
+	12pt,				% tamanho da fonte
+	oneside,			% para impressão apenas no verso. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	sumario=tradicional
+	]{abntex2}
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% Para melhorias de justificação
+\usepackage{float}				% Para ajuste na posição de
+\usepackage[utf8]{inputenc}
+\usepackage{authblk}
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+		
+% ---
+% Pacotes de citações
+% ---
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+
+\titulo{ 
+RESOLVENDO O PROBLEMA DO CAIXEIRO VIAJANTE VIA PROCEDIMENTO DE METAHEURÍSTICA GRASP }
+\autor{Gabriel Angelo Freire Gonçalves,\\Nome do segundo autor}
+\local{Brasil}
+\date{20 de Novembro de 2018}
+\affil{Universidade Estadual do Ceará \\ Departamento de ciência da computação}
+% ---
+
+% ---
+% Alterando o aspecto da cor azul
+% ---
+\definecolor{blue}{RGB}{41,5,195}
+% ---
+
+% ---
+% Informações do PDF
+% ---
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={Modelo de artigo científico com abnTeX2},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{artigo científico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% ---
+% Compila o índice
+% ---
+\makeindex
+% ---
+
+% ---
+% Altera as margens padrões
+% ---
+\setlrmarginsandblock{2cm}{2cm}{*}
+\setulmarginsandblock{2cm}{2cm}{*}
+\checkandfixthelayout
+% ---
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{.5cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Espaçamento simples
+\SingleSpacing
+% ---
+
+% --- 
+% Cabeçalho 
+% --- 
+\makepagestyle{meuestilo}
+  \makeoddhead{meuestilo} %%pagina ímpar ou com oneside
+     { }
+     {}
+     {Artigo 0,  pág. \thepage}
+% ---
+
+% ---
+% Margem para resumo, palavras-chave, abstract e keywords
+% ---
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+% ----
+
+% ---
+% Início do documento
+% ---
+\begin{document}
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% Aplica o cabeçalho em todas as páginas, excetuando-se a primeira
+\pagestyle{meuestilo}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% Página de titulo
+\maketitle
+
+% Aplica cabeçalho na primeira página
+\thispagestyle{meuestilo}
+% ---
+
+% -----------------------------------------------------------
+% Resumo em português
+% -----------------------------------------------------------
+\begin{changemargin}{1cm}{1cm} 
+ \textbf{Resumo} – A maioria dos problemas de otimizacão combinatória pertencem à classe NP, o que signiﬁca que asua solução ótima por meio de métodos enumerativos pode exigir um tempo de processamento inviável. Assim, o uso de heurísticas é frequentemente mais interessante, pois são capazes de encontrar uma relação custo/benefício aceitável entre a qualidade da solução e o tempo de processamento. Este artigo propõe uma meta-heurística para solução do problema do caixeiro viajante (TSP), em que um procedimento de busca adaptativa aleatória gulosa(GRASP) é implementado.
+
+ \vspace{\onelineskip}
+ 
+ \noindent
+ \textbf{Palavras-chave} – Problema do caixeiro viajante, redes auto-organizáveis, otimização combinatória; 
+\end{changemargin}
+
+% ---
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\section{Introdução}
+\addcontentsline{toc}{section}{Introdução}
+
+% ---
+% Nota de rodapé na primeira página
+% ---
+
+% ---
+
+O estudo de problemas de otimização combinatória é relevante tanto do ponto de vista teórico quanto prático. Estes problemas são comumente encontrados em diversas situações reais,tais como, roteamento de veículos (“Vehicle Routing Problems” (VRP)) e programação de tabela de horários (“Scheduling”), e são usualmente classiﬁcados como NP-completo ou NP-difícil 
+ (Lewisand Papadimitriou, 1997), o que implica na não existência de uma solução determinística capaz de ser executada em tempo polinomial. Por isso, ouso de heuríssticas é frequentemente mais interessante (Glover and Kochenberger, 2003), pois são capazes de encontrar uma relação
+ custo/benefício aceitável entre a qualidade da solução e o tempo necessário para o seu cálculo.
+
+\section{Definição do problema}
+
+O Problema do Caixeiro Viajante (TSP, do inglês Traveling-Salesman Problem) é um problema
+NP-Difícil da área de otimização que possui inúmeras aplicações práticas. O TSP modela diversas
+situações reais, como o roteamento de veículos para atender chamados ou ocorrências.
+Por pertencer à classe dos problemas NP-Difíceis, não há algoritmos eficientes para resolvê-lo
+na exatidão. O TSP também é encontrado como subproblema de modelagens maiores, que envolvem
+muitas vezes vários problemas pertencentes às classes NP-Completa e NP-Difícil, como
+o Problema da Mochila (Martello e Toth, 1990). 
+
+O TSP consiste em, dado um grafo completo G(V, E), com n vértices, obter um ciclo
+hamiltoniano de custo mínimo, isto é, deseja-se, a partir de um vértice inicial, passar por todos
+os demais vértices do grafo uma única vez e então retornar ao vértice inicial. Cada aresta que
+liga um par de vértices do grafo possui um custo c(i, j) que determina o quanto se gasta para ir de i até j. Esse custo pode ter diversos significados, de acordo com a aplicação desejada.
+Ele pode representar, por exemplo, a distância, o tempo ou mesmo o preço para se deslocar
+entre duas cidades i e j. Considerando esses custos, o objetivo do problema é obter um ciclo
+hamiltoniano de custo total mínimo a partir de um dado ponto inicial. Esse custo total é dado
+pela soma dos pesos de todas as arestas contidas no ciclo. \\
+\\*
+A definição de um ciclo hamiltoniano é dada da seguinte forma:
+Dado um grafo G(V, E) com n vértices, deseja-se obter um ciclo (v1, . . . , vn) que parta de
+um vértice inicial v1, passe por todos os demais n-1 vértices de V uma única vez e retorne a v1.
+A definição formal pode ser escrita como se segue:
+Dados um grafo completo G(V, E) e uma função custo c : V x V → Q+, encontrar uma
+permutação (v1, v2, . . . , vn) de V tal que
+\\
+\tabcc
+\[c(vn, v1) +
+\sum_{i=1}^{n-1} c(vi, vi+1)$
+seja mínimo.
+
+
+\section{Descrição do algoritmo e complexidade}
+        digite aqui.
+
+\section {Resultados dos experimentos computacionais}
+    digite aqui 
+    
+\section {Conclusões}
+    digite aqui
+
+
+%Para mais informações sobre como citar adequadamente diferentes tipos de trabalho, consulte por exemplo as diretrizes compiladas pela Divisão de Bibliotecas da Escola Politécnica da USP (2013), disponível em
+
+%http://www.poli.usp.br/images/stories/media/download/bibliotecas/DiretrizesTesesDissertacoes.pdf
+
+\section*{Referências}
+
+\noindent Blum, and Roli, A. (2003). Metaheuristics incombinatorial optimization: Overview and conceptual comparison.
+
+\noindent SLin, S. and Kernighan, B. (1973). An effective heuristic
+algorithm for the traveling-salesman problem,
+Operations Research 21(2): 498–516
+
+\vspace{-8mm}
+\begingroup
+\makeatletter
+\renewcommand{\chapter}{\@gobbletwo}
+\makeatother
+\bibliographystyle{abntex2-alf-mod}
+\bibliography{mybibfile}
+\endgroup
+
+\begin{changemargin}{1cm}{1cm} 
+
+
+
+\end{changemargin}
+
+% \begin{figure}[h]
+%     \includegraphics[width=0.5\textwidth]{figure2}
+%     \caption{figura2}
+%     \label{figura2}
+% \end{figure}
+
+% \begin{figure}[h]
+%     \includegraphics[width=0.5\textwidth]{figure2}
+%     \caption{figura2}
+%     \label{figura2}
+% \end{figure}
+
+
+\end{document}
